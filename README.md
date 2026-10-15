@@ -1,68 +1,64 @@
-# Financial Market Intelligence Bot
+# Financial Market Intelligence
 
-A graduation-project research prototype that combines financial-news collection, abstractive summarization, sentiment classification, a Telegram interface, and experimental stock-price forecasting. The original work dates from around 2022.
+An AI-powered financial news analysis project developed as a graduation project. It brings together natural language processing, financial sentiment analysis, text summarization, and market-data exploration in one workflow.
 
-> **Status: legacy research prototype — not production-ready.** The code has been curated for portfolio presentation and credentials were removed from the published copy. The bot and forecasting experiments have not been fully runtime-tested in a clean environment.
+## Overview
 
-## Project overview
+Financial news can be difficult to review at scale. This project explores how NLP models can help turn financial articles into concise summaries and structured sentiment signals.
 
-- **News collection:** searches for Yahoo Finance news links and extracts article text with `requests` and Beautiful Soup.
-- **Summarization:** uses the Hugging Face `human-centered-summarization/financial-summarization-pegasus` model.
-- **Financial sentiment:** uses `ahmedrachid/FinancialBERT-Sentiment-Analysis` to classify text as positive, neutral, or negative.
-- **Telegram interface:** lets users select a ticker/crypto symbol and request news analysis. The bot also contains an experimental price-forecasting path.
-- **Forecasting experiments:** separate Streamlit/Prophet and PyTorch LSTM scripts are preserved under `experiments/` for review.
+## Key Features
 
-## Technology stack
+- **Financial news collection** — retrieves and extracts financial-news content for a selected market symbol.
+- **AI-powered summarization** — generates concise summaries of longer articles using a PEGASUS-based summarization model.
+- **Financial sentiment analysis** — classifies news text into positive, neutral, or negative sentiment using a FinancialBERT model.
+- **Interactive Telegram interface** — provides a chat-based way to request news analysis for selected tickers and crypto symbols.
+- **Market forecasting experiments** — includes separate exploratory implementations using Prophet and LSTM.
 
-Python · Hugging Face Transformers · PyTorch · FinancialBERT · PEGASUS · python-telegram-bot · Beautiful Soup · Requests · yfinance · Prophet · Streamlit · pandas
+## Technology Stack
 
-## Repository structure
+| Area | Technologies |
+|---|---|
+| Language | Python |
+| NLP and AI | Hugging Face Transformers, FinancialBERT, PEGASUS |
+| Data processing | pandas, Requests, Beautiful Soup |
+| Market data | yfinance |
+| Forecasting experiments | Prophet, PyTorch, LSTM |
+| Interface | python-telegram-bot, Streamlit |
+
+## Project Structure
 
 ```text
 financial-market-intelligence/
-├── src/telegram_bot.py
+├── src/
+│   └── telegram_bot.py
 ├── experiments/
 │   ├── prophet_stock_forecast_app.py
 │   └── lstm_forecasting_experiment.py
 ├── docs/
+├── requirements.txt
 ├── .env.example
 ├── .gitignore
-├── requirements.txt
 └── README.md
 ```
 
-## Security before running
+## How It Works
 
-The source archive contained Telegram bot tokens embedded directly in several files. Those values have been removed from this curated repository. **Treat the old tokens as compromised and revoke/regenerate each one in Telegram's `@BotFather` before using a bot again.** I cannot revoke credentials on your behalf because that requires access to your Telegram account. Do not commit a real `.env` file or token.
+1. A user selects a financial ticker or cryptocurrency symbol.
+2. The project collects relevant financial-news content.
+3. NLP models summarize article text and estimate its sentiment.
+4. Separate forecasting experiments explore time-series approaches to market data.
 
-1. Create a new token through `@BotFather` for the bot you intend to use.
-2. Create a local `.env` file from `.env.example` and insert the new token. `.env` is ignored by Git.
-3. In your terminal, activate a virtual environment and install the requirements.
-4. Set `TELEGRAM_BOT_TOKEN` in the environment before starting `src/telegram_bot.py`. The example code expects this environment variable; it does not automatically load `.env`. On Windows PowerShell, use `$env:TELEGRAM_BOT_TOKEN="your-new-token"` for the current terminal session.
+## Scope
 
-## Setup (Windows PowerShell)
+This is an academic project exploring the application of NLP and machine learning to financial information. The forecasting scripts are experimental and are separate from the news-analysis workflow.
 
-```powershell
-py -3.10 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-$env:TELEGRAM_BOT_TOKEN="your-new-token"
-python .\src\telegram_bot.py
-```
+## Notes
 
-The Transformers models download on first use and may require substantial memory and disk space. Dependency compatibility may need adjustments, especially because the original Telegram integration uses the older `python-telegram-bot` v13 API. A successful package installation alone does not guarantee that the entire application works.
+- Pre-trained models may download when first used and can require significant memory and disk space.
+- External news pages and data providers may change their formats or availability.
+- Results depend on the input data and model behavior; sentiment labels and forecasts should not be treated as investment recommendations.
+- Model and data usage remain subject to the respective providers' licenses and terms.
 
-## Known limitations and next improvements
+## Disclaimer
 
-- The news collector relies on scraping search-engine and publisher HTML, which can change or block automated requests.
-- The bot loads large NLP models at startup, increasing startup time and memory usage.
-- Error handling, request timeouts, retries, logging, and automated tests need improvement.
-- The forecasting scripts are experimental and have not been validated against robust baselines or leakage-safe evaluation. Their output must not be interpreted as financial advice.
-- A production-quality revision should separate scraping, NLP inference, bot handlers, and forecasting into tested modules; use maintained APIs; add tests and CI; and document model/data licenses.
-
-## Academic / financial disclaimer
-
-This project was developed as an academic prototype. Sentiment labels and model-generated forecasts can be wrong, and historical performance does not guarantee future results. Nothing in this repository is financial advice or a recommendation to buy or sell an asset.
-
-
+This project is for educational and research purposes only. It does not provide financial advice or recommendations to buy or sell any asset.
