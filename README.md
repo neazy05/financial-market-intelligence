@@ -65,6 +65,4 @@ The Transformers models download on first use and may require substantial memory
 
 This project was developed as an academic prototype. Sentiment labels and model-generated forecasts can be wrong, and historical performance does not guarantee future results. Nothing in this repository is financial advice or a recommendation to buy or sell an asset.
 
-## Attribution
 
-The original graduation-project bot text identifies Abdelrhman Nyazi and Saif Abdulwahab as student developers and Dr. Firas Al-Zein as supervisor. Confirm that you are comfortable publishing these names before making the repository public.
